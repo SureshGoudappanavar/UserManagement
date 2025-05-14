@@ -1,0 +1,139 @@
+<div >
+    <div class="fxb modal-header">{{action}} User</div>
+    <mat-divider class="heading-divider"></mat-divider>
+    <div mat-dialog-content>
+        <div *ngIf="action != 'Delete'; else elseTemplate">
+            <form #userForm="ngForm"> 
+                <label>Email<span class="required">*</span></label>
+                <mat-form-field appearance="outline">
+                    <input (keyup)="checkEmail($event)" 
+                    required 
+                    placeholder="{{action}} Email" 
+                    name="email" 
+                    matInput 
+                    [(ngModel)]="local_data.email" 
+                    #email="ngModel" 
+                    email> 
+                    <mat-error *ngIf="!email.valid">Enter a valid Email</mat-error> 
+                    <mat-hint *ngIf="emailExists">This email already exists</mat-hint> 
+                </mat-form-field>
+                
+                <label>First Name<span class="required">*</span></label>
+                <mat-form-field appearance="outline">
+                    <input placeholder="{{action}} First Name"
+                    required
+                    name="firstName"
+                    matInput 
+                    [(ngModel)]="local_data.firstName" 
+                    firstName 
+                    #firstName="ngModel"> 
+                    <mat-error *ngIf="!firstName.valid">First Name is Required</mat-error> 
+                </mat-form-field>
+                
+                <label>Last Name<span class="required">*</span></label>
+                <mat-form-field appearance="outline">
+                    <input placeholder="{{action}} Last Name" 
+                    required name="lastName" 
+                    matInput 
+                    [(ngModel)]="local_data.lastName" 
+                    lastName 
+                    #lastName="ngModel">
+                    <mat-error *ngIf="!lastName.valid">Last Name is Required</mat-error> 
+                </mat-form-field>
+                
+                <label>Role<span class="required">*</span></label>
+                <mat-form-field appearance="outline">
+                    <mat-select name="role" 
+                    matInput 
+                    [(ngModel)]="local_data.role" 
+                    placeholder="Select A Role" 
+                    role 
+                    #role="ngModel" 
+                    required>
+                    <mat-option *ngFor="let role of roles" [value]="role.value">
+                        {{role.label}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="!role.valid">Role is Required</mat-error>
+            </mat-form-field>
+            
+            <label>Status<span class="required">*</span></label>
+            <mat-form-field appearance="outline">
+                <mat-select 
+                name="status" 
+                matInput 
+                [(ngModel)]="local_data.status" 
+                placeholder="Select Status" 
+                status 
+                #status="ngModel" 
+                required>
+                <mat-option *ngFor="let status of statusOptions" [value]="status.value">
+                    {{status.label}}
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="!status.valid">Status is Required</mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+        <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+            <div>
+                <button mat-button (click)="doAction()" [disabled]="!userForm.valid || emailExists" type="submit" class="submit fb">{{action}}
+                    <span class="material-symbols-outlined action-icon">
+                        {{action == "Add"? "add_circle": "update"}}
+                    </span>
+                </button>
+            </div>
+            <div>
+                <button mat-button (click)="closeDialog()" class="cancel fb">Cancel 
+                    <span class="material-symbols-outlined action-icon">
+                        cancel
+                    </span>
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+<ng-template #elseTemplate>
+    <div class="delete-text">
+        Are you sure you want to delete <b>{{local_data.firstName}} {{local_data.lastName}}{{local_data.lastName.endsWith("s")?"'":"'s"}}</b> account?
+    </div>
+    <div class="delete-profile f">
+        <div fxLayout="row" fxLayoutGap="10px">
+            <div>
+                <img [src]='local_data.img' class="profile-img" alt="">
+            </div>
+            <div fxLayout="column">
+                <div class="name">
+                    {{local_data.firstName}} {{local_data.lastName}}
+                </div>
+                <div>
+                    {{local_data.email}} 
+                </div>
+                <div fxLayout="row">
+                    <div>{{local_data.role | titlecase}} </div>
+                    <mat-divider class="verticalDivider" [vertical]="true"></mat-divider>
+                    <div> {{local_data.status | titlecase}} </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-divider></mat-divider>
+        <div mat-dialog-actions fxLayout="row" fxLayoutAlign="end center" fxLayoutGap="20px">
+            <div>
+                <button mat-button (click)="doAction()" type="submit" class="submit fb">{{action}}
+                    <span class="material-symbols-outlined action-icon">
+                        delete
+                    </span>
+                </button>
+            </div>
+            <div>
+                <button mat-button (click)="closeDialog()" class="cancel fb">Cancel 
+                    <span class="material-symbols-outlined action-icon">
+                        cancel
+                    </span>
+                </button>
+            </div>
+        </div>
+</ng-template>
+</div>
+
+</div>

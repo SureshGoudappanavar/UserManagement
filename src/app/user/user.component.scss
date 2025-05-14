@@ -1,0 +1,66 @@
+@import '../../assets/styles/global.scss';
+
+table {
+    width: 100%;
+}
+.profile-img {
+    height: 38px;
+}
+.action-icon {
+    font-size: 20px;
+    position: relative;
+    top: 5px;
+    margin-right: 5px;
+}
+.heading {
+    font-family: "new-hero-extra-bold";
+}
+.addButton {
+    position: absolute;
+    right: 0;
+    top: 0;
+    float: right;
+    height: 48px;
+    background-color: $primary-midnight-50;
+}
+.verticalDivider {
+    position: relative;
+    top: 0px;
+    height: 21px;
+}
+.add-icon {
+    font-size: 20px;
+    position: relative;
+    top: -1px;
+}
+.update {
+    color:$secondary-dandelion-100;
+    cursor: pointer;
+}
+.delete {
+    color: $secondary-sunset-100;
+    cursor: pointer;
+}
+.email {
+    color: $light-grey;
+}
+.id {
+    color: $light-grey;
+}
+.logo {
+    width: 170px;
+}
+mat-toolbar {
+    background-color: #fff5f9;
+    z-index: 100;
+}
+.toolbar-divider {
+    
+    margin-bottom: 40px;
+}
+.responsive {    
+    overflow-x: auto;
+}
+.table-header {
+    color: $primary-midnight-100;
+}
